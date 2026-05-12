@@ -22,31 +22,40 @@ export const Footer = () => {
               <div className="w-10 h-10 bg-electric rounded-xl flex items-center justify-center shadow-2xl shadow-electric/20">
                 <span className="text-white text-lg font-bold">K</span>
               </div>
-              <span>KickoTech</span>
+              <span>Kicko</span>
             </motion.div>
             <p className="text-zinc-400 text-lg leading-relaxed max-w-md mb-10 font-light">
               We engineer scalable digital ecosystems for the next generation of industry leaders. Precision architecture, deep intelligence, and rapid execution.
             </p>
             <div className="flex gap-3">
-              {[Github, Twitter, Linkedin, Instagram].map((Icon, i) => (
-                <motion.a 
-                  key={i} 
-                  whileHover={{ y: -3, backgroundColor: 'rgba(255,255,255,0.1)' }}
-                  className="w-11 h-11 rounded-xl bg-white/5 flex items-center justify-center text-zinc-400 hover:text-electric transition-all cursor-pointer border border-white/10 hover:border-electric/30"
-                >
-                  <Icon className="w-5 h-5" />
-                </motion.a>
-              ))}
-            </div>
+  {[
+    { Icon: Github, color: 'hover:text-white' },
+    { Icon: Twitter, color: 'hover:text-sky-400' },
+    { Icon: Linkedin, color: 'hover:text-blue-500' },
+    { Icon: Instagram, color: 'hover:text-pink-500' },
+  ].map(({ Icon, color }, i) => (
+    <motion.a
+      key={i}
+      whileHover={{
+        y: -3,
+        scale: 1.05,
+      }}
+      className={`w-11 h-11 rounded-xl bg-white/5 flex items-center justify-center text-zinc-400 transition-all cursor-pointer border border-white/10 hover:border-electric/30 ${color}`}
+      href="#"
+    >
+      <Icon className="w-5 h-5" />
+    </motion.a>
+  ))}
+</div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 lg:col-span-3 gap-12">
             <div>
               <h4 className="text-[10px] font-bold uppercase tracking-[0.3em] text-white mb-8 border-l-2 border-electric pl-4">Platform</h4>
               <ul className="space-y-4 text-xs font-medium text-zinc-500">
-                <li><a className="hover:text-electric transition-colors cursor-pointer flex items-center group">Web Engineering <ArrowRight className="w-3 h-3 ml-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" /></a></li>
-                <li><a className="hover:text-electric transition-colors cursor-pointer flex items-center group">AI Systems <ArrowRight className="w-3 h-3 ml-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" /></a></li>
-                <li><a className="hover:text-electric transition-colors cursor-pointer flex items-center group">Cloud Scaling <ArrowRight className="w-3 h-3 ml-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" /></a></li>
+                <li><a className="hover:text-electric transition-colors cursor-pointer flex items-center group">SaaS Development<ArrowRight className="w-3 h-3 ml-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" /></a></li>
+                <li><a className="hover:text-electric transition-colors cursor-pointer flex items-center group">Mobile App Development <ArrowRight className="w-3 h-3 ml-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" /></a></li>
+                <li><a className="hover:text-electric transition-colors cursor-pointer flex items-center group">Web Development<ArrowRight className="w-3 h-3 ml-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" /></a></li>
                 <li><a className="hover:text-electric transition-colors cursor-pointer flex items-center group">Product Design <ArrowRight className="w-3 h-3 ml-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" /></a></li>
               </ul>
             </div>

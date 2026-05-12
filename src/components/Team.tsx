@@ -9,7 +9,7 @@ const team = [
     role: 'Senior Software Developer',
     experience: '6+ Years in Full-Stack Architecture',
     projects: ['Cloud Infrastructure Sync', 'Nebula AI Core', 'Retail Scaler'],
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400',
+    image: 'https://cdn-icons-png.flaticon.com/512/4140/4140048.png',
     color: 'from-blue-500 to-indigo-600'
   },
   {
@@ -18,7 +18,7 @@ const team = [
     role: 'Software Developer',
     experience: '3+ Years in Scalable Web Apps',
     projects: ['Kicko Voice Integration', 'Fintech Dashboards', 'Auth Systems'],
-    image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=400',
+    image: 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png',
     color: 'from-electric to-royal'
   },
   {
@@ -27,7 +27,8 @@ const team = [
     role: 'Software Developer',
     experience: '3+ Years in Backend Systems',
     projects: ['Real-time Analytics', 'Inventory Microservices', 'Migration Tools'],
-    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=400',
+    image: 'https://cdn-icons-png.flaticon.com/512/2202/2202112.png',
+
     color: 'from-purple-500 to-pink-500'
   },
   {
@@ -36,7 +37,7 @@ const team = [
     role: 'Software Developer',
     experience: '2+ Years in Frontend Engineering',
     projects: ['Vision OS UI Kit', 'Lord of Languages Core', 'Performance Tuning'],
-    image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=400',
+    image: 'https://cdn-icons-png.flaticon.com/512/6997/6997662.png',
     color: 'from-cyan-500 to-blue-500'
   }
 ];
