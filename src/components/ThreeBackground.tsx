@@ -1,4 +1,4 @@
-import { useRef, useMemo, useState } from 'react';
+import { useRef, useMemo, useState, useEffect } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Float, Sphere, MeshDistortMaterial, Points, PointMaterial, MeshWobbleMaterial, Torus } from '@react-three/drei';
 import * as THREE from 'three';
@@ -125,6 +125,23 @@ const GeometricObjects = () => {
 };
 
 export const ThreeBackground = () => {
+  const [canRender, setCanRender] = useState(false);
+
+  useEffect(() => {
+    try {
+      const canvas = document.createElement('canvas');
+      const supported = !!(
+        window.WebGLRenderingContext &&
+        (canvas.getContext('webgl') || canvas.getContext('experimental-webgl'))
+      );
+      setCanRender(supported);
+    } catch {
+      setCanRender(false);
+    }
+  }, []);
+
+  if (!canRender) return null;
+
   return (
     <div className="fixed inset-0 z-0 pointer-events-none transition-colors duration-1000">
       <Canvas camera={{ position: [0, 0, 15], fov: 45 }} gl={{ alpha: true }}>

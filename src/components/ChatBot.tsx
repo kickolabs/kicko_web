@@ -3,10 +3,11 @@ import { motion, AnimatePresence } from 'motion/react';
 import { MessageSquare, X, Send, Bot, AlertCircle } from 'lucide-react';
 import { GoogleGenAI } from '@google/genai';
 
-// Initialize Gemini API
-const ai = new GoogleGenAI({
-  apiKey: import.meta.env.VITE_GEMINI_API_KEY
-});
+const getAI = () => {
+  const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+  if (!apiKey) return null;
+  return new GoogleGenAI({ apiKey });
+};
 
 const SYSTEM_INSTRUCTION = `
 You are the KickoTech Assistant, a professional and helpful A.I. representative of KickoTech. 
@@ -64,6 +65,12 @@ export const ChatBot = () => {
     setError(null);
 
     try {
+      const ai = getAI();
+      if (!ai) {
+        setError('AI chat is unavailable. Add VITE_GEMINI_API_KEY to enable it.');
+        return;
+      }
+
       const response = await ai.models.generateContent({
         model: 'gemini-1.5-flash',
         contents: [

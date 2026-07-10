@@ -3,9 +3,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { Suspense, lazy, useEffect, useState } from 'react';
+import { Suspense, lazy } from 'react';
 import { motion, useScroll, useSpring } from 'motion/react';
-import { ChevronUp } from 'lucide-react';
 
 // Modular Components
 import { Navbar } from './components/Navbar';
@@ -18,14 +17,15 @@ import { Technology } from './components/Technology';
 import { Testimonials } from './components/Testimonials';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
-import { ChatBot } from './components/ChatBot';
 import { Team } from './components/Team';
 import { Process } from './components/Process';
 //import { FAQ } from './components/FAQ';
 import { Blog } from './components/Blog';
 import { ScrollToTop } from './components/ScrollToTop';
+import { ErrorBoundary } from './components/ErrorBoundary';
 
 const ThreeBackground = lazy(() => import('./components/ThreeBackground').then(m => ({ default: m.ThreeBackground })));
+const ChatBot = lazy(() => import('./components/ChatBot').then(m => ({ default: m.ChatBot })));
 
 const ScrollProgress = () => {
   const { scrollYProgress } = useScroll();
@@ -43,61 +43,7 @@ const ScrollProgress = () => {
   );
 };
 
-const LoadingScreen = () => (
-  <div className="fixed inset-0 bg-white dark:bg-[#030303] flex flex-col items-center justify-center z-[1000] overflow-hidden">
-    <div className="absolute inset-0 bg-grid-zinc-900/5 dark:bg-grid-white/5 opacity-20" />
-    <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-electric to-transparent animate-shimmer" />
-    
-    <div className="relative flex flex-col items-center">
-      <motion.div
-        initial={{ scale: 0.8, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
-        className="w-20 h-20 bg-electric rounded-2xl flex items-center justify-center shadow-2xl shadow-electric/20 mb-8 relative"
-      >
-        <span className="text-white font-bold text-3xl">K</span>
-        <motion.div 
-          animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.6, 0.3] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute inset-0 bg-electric rounded-2xl -z-10 blur-xl"
-        />
-      </motion.div>
-      
-      <div className="flex flex-col items-center gap-3">
-        <div className="flex items-center gap-2">
-          <motion.div 
-            animate={{ width: ["0%", "100%"] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="h-[1px] w-12 bg-electric/30"
-          />
-          <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-400 dark:text-zinc-500">
-            Initializing Systems
-          </span>
-          <motion.div 
-            animate={{ width: ["0%", "100%"] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="h-[1px] w-12 bg-electric/30"
-          />
-        </div>
-        <div className="flex gap-1">
-          {[0, 1, 2].map((i) => (
-            <motion.div
-              key={i}
-              animate={{ opacity: [0.2, 1, 0.2] }}
-              transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.2 }}
-              className="w-1 h-1 rounded-full bg-electric"
-            />
-          ))}
-        </div>
-      </div>
-    </div>
-
-    <div className="absolute bottom-12 left-12 right-12 flex justify-between items-center opacity-40">
-      <p className="text-[8px] font-mono uppercase tracking-widest text-zinc-500">KickoTech v2.0.4</p>
-      <p className="text-[8px] font-mono uppercase tracking-widest text-zinc-500">Est. 2026</p>
-    </div>
-  </div>
-);
+const LoadingScreen = () => null;
 
 export default function App() {
   const partners = [
@@ -114,9 +60,11 @@ export default function App() {
     <div className="bg-white dark:bg-[#030303] text-zinc-900 dark:text-white overflow-x-hidden transition-colors duration-700">
       <ScrollProgress />
       
-      <Suspense fallback={<LoadingScreen />}>
-        <ThreeBackground />
-      </Suspense>
+      <ErrorBoundary>
+        <Suspense fallback={<LoadingScreen />}>
+          <ThreeBackground />
+        </Suspense>
+      </ErrorBoundary>
       
       <Navbar />
       
@@ -163,7 +111,11 @@ export default function App() {
       
       <Footer />
       <ScrollToTop />
-      <ChatBot />
+      <ErrorBoundary>
+        <Suspense fallback={null}>
+          <ChatBot />
+        </Suspense>
+      </ErrorBoundary>
       
       {/* Background Mesh Overlay */}
       <div className="fixed inset-0 bg-mesh opacity-20 pointer-events-none -z-0" />
